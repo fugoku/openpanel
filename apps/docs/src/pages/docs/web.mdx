@@ -1,0 +1,138 @@
+import Link from 'next/link';
+import { Callout, Steps, Tabs } from 'nextra/components';
+import { DeviceIdWarning } from 'src/components/device-id-warning';
+import { PersonalDataWarning } from 'src/components/personal-data-warning';
+
+import SdkConfig from 'src/components/sdk-config.mdx';
+
+# Web SDK
+
+This is a wrapper of <Link href="/docs/javascript">Javascript SDK</Link>. It's a simple way to use the Openpanel SDK in your web application.
+
+## Installation
+
+<Steps>
+### Install dependencies
+
+```bash
+pnpm install @openpanel/web
+```
+
+### Initialize
+
+```tsx
+import { Openpanel } from '@openpanel/web';
+
+const op = new Openpanel({
+  url: 'https://api.openpanel.dev',
+  clientId: '{YOUR_CLIENT_ID}',
+  trackScreenViews: true,
+  // trackAttributes: true,
+  // trackOutgoingLinks: true,
+});
+```
+
+#### Config
+
+<SdkConfig />
+
+### Ready!
+
+You're now ready to use the library.
+
+```typescript
+// Sends an event with payload foo: bar
+op.event('my_event', { foo: 'bar' });
+
+// Identify with profile id
+op.setProfileId('123');
+
+// or with additional data
+op.setProfile({
+  profileId: '123',
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'john.doe@openpanel.dev',
+});
+
+// Increment a property
+op.increment('app_opened'); // increment by 1
+op.increment('app_opened', 5); // increment by 5
+
+// Decrement a property
+op.decrement('app_opened'); // decrement by 1
+op.decrement('app_opened', 5); // decrement by 5
+```
+
+</Steps>
+
+## Usage
+
+### Track event
+
+```typescript
+op.event('my_event', { foo: 'bar' });
+```
+
+### Identify
+
+#### Set Profile Id
+
+Keep track of your users by identifying them with a unique id. This is a good features if you have things behind a login and want to track user behavior.
+
+<PersonalDataWarning />
+
+```typescript
+const profileId = '123';
+op.setProfileId(profileId);
+```
+
+#### Additional data
+
+This method does the same as `setProfileId` but also allows you to update the profile with additional data.
+
+<PersonalDataWarning />
+
+```typescript
+const profileId = '123';
+op.setProfile({
+  profileId,
+  // firstName?: string;
+  // lastName?: string;
+  // email?: string;
+  // avatar?: string;
+  // properties?: Record<string, unknown>;
+});
+```
+
+#### Increment property
+
+Increment a property on the profile.
+
+```typescript
+// Increment by 1
+op.increment('app_opened');
+
+// Increment by 5
+op.increment('app_opened', 5);
+```
+
+#### Decrement property
+
+Decrement a property on the profile.
+
+```typescript
+// Increment by 1
+op.decrement('app_opened');
+
+// Increment by 5
+op.decrement('app_opened', 5);
+```
+
+#### Clear / Logout
+
+Clear the profile id and all the data.
+
+```typescript
+op.clear();
+```
