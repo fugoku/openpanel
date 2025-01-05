@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm with-env next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node init && pnpm with-env next dev",
+    "build": "node init && next build",
+    "start": "node init && next start",
     "postinstall": "fumadocs-mdx",
     "with-env": "dotenv -e ../../.env -c --"
   },

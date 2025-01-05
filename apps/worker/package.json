@@ -2,10 +2,10 @@
   "name": "@openpanel/worker",
   "version": "0.0.1",
   "scripts": {
-    "dev": "dotenv -e ../../.env -c -v WATCH=1 tsup",
+    "dev": "node init && dotenv -e ../../.env -c -v WATCH=1 tsup",
     "testing": "WORKER_PORT=9999 pnpm dev",
-    "start": "node dist/index.js",
-    "build": "rm -rf dist && tsup",
+    "start": "node init && node dist/index.js",
+    "build": "node init && rm -rf dist && tsup",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
