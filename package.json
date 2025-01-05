@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "author": "Carl-Gerhard Lindesvärd",
+  "author": "Carl-Gerhard Lindesv\u00e4rd",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dock:up": "docker compose up -d",
@@ -14,7 +14,7 @@
     "codegen": "pnpm db:codegen",
     "migrate": "pnpm -r --filter db run migrate",
     "migrate:deploy": "pnpm -r --filter db run migrate:deploy",
-    "dev": "pnpm -r --parallel testing",
+    "dev": "node api.js && pnpm -r --parallel testing",
     "format": "biome format .",
     "format:fix": "biome format --write .",
     "lint": "biome check .",
